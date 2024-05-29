@@ -1,0 +1,22 @@
+tenant-name: ${TENANT.NAME:local}
+env: ${SERVER.DEPLOYMENT:dev}
+server-env: ${SERVER.ENVIRONMENT:integration}
+
+server:
+  port: ${SERVER.PORT:8090}
+
+spring:
+  application-name: ${APPLICATION.NAME:sparky-quiz}
+  datasource:
+    drive-class-name: org.postgresql.driver
+    url: jdbc:postgresql://localhost:5432/quiz
+    username: postgres
+    password: 123456789
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+
