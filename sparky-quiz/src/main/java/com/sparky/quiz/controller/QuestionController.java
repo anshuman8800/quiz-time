@@ -5,9 +5,7 @@ import com.sparky.quiz.service.question.QuestionService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,5 +30,54 @@ public class QuestionController {
     public List<Question> getAllQuestions() {
         log.info("Fetching all questions");
         return questionService.getAllQuestions();
+    }
+
+    /**
+     * Retrieves a specific question by its ID.
+     *
+     * @param id The ID of the question to retrieve.
+     * @return The question with the specified ID.
+     */
+    @GetMapping(value = "/{id}")
+    public Question getQuestionById(@PathVariable final Integer id) {
+        log.info("Fetching question with id: [{}]", id);
+        return questionService.getQuestionById(id);
+    }
+
+    /**
+     * Updates an existing question.
+     *
+     * @param id       The ID of the question to update.
+     * @param question The updated question object.
+     * @return The updated question.
+     */
+    @PutMapping(value = "/{id}")
+    public Question updateQuestion(
+            @PathVariable final Integer id, @RequestBody final Question question) {
+        log.info("Update question with question id : [{}]", question.getId());
+        return questionService.updateQuestion(id, question);
+    }
+
+    /**
+     * Creates a new question.
+     *
+     * @param question The question object to create.
+     * @return The created question.
+     */
+    @PostMapping()
+    public Question createQuestion(@RequestBody final Question question) {
+        log.info("Creating question : [{}]", question);
+        return questionService.createQuestion(question);
+    }
+
+    /**
+     * Deletes a question by its ID.
+     *
+     * @param id The ID of the question to delete.
+     */
+    @DeleteMapping(value = "{id}")
+    public void deleteQuestion(@PathVariable final Integer id) {
+        log.info("Deleting the qeustion with id : [{}]", id);
+        questionService.deleteQuestionById(id);
     }
 }
