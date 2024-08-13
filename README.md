@@ -1,2 +1,2 @@
 # quiz-time
-Quiz Time
+Quiz_Time
